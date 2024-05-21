@@ -1,0 +1,4 @@
+bazel-*
+*.lock
+*.vscode
+jhcustom*
