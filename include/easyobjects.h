@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#ifndef
 
 #ifndef BOOL
 #define BOOL int 
