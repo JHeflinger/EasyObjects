@@ -2,6 +2,7 @@
 #define EASYOBJECTS_H
 
 #include "ezologger.h"
+#include "easymemory.h"
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
@@ -35,7 +36,7 @@ void ARRLIST_##T##_clear(ARRLIST_##T* list);
 #define IMPL_ARRLIST(T) \
 void ARRLIST_##T##_add(ARRLIST_##T* list, T element) { \
 	if (list->maxsize == 0) { \
-		list->data = (T*)calloc(1, sizeof(T)); \
+		list->data = (T*)EZALLOC(1, sizeof(T)); \
 		list->size = 1; \
 		list->maxsize = 1; \
 		memcpy(list->data, &element, sizeof(T)); \
@@ -44,9 +45,9 @@ void ARRLIST_##T##_add(ARRLIST_##T* list, T element) { \
 		list->size++; \
 	} else { \
 		list->maxsize *= 2; \
-		T* newdata = (T*)calloc(list->maxsize, sizeof(T)); \
+		T* newdata = (T*)EZALLOC(list->maxsize, sizeof(T)); \
 		memcpy(newdata, list->data, sizeof(T)*list->size); \
-		free(list->data); \
+		EZFREE(list->data); \
 		list->data = newdata; \
 		memcpy(&(list->data[list->size]), &element, sizeof(T)); \
 		list->size++; \
@@ -79,7 +80,7 @@ T ARRLIST_##T##_get(ARRLIST_##T* list, size_t index) { \
 \
 void ARRLIST_##T##_clear(ARRLIST_##T* list) { \
 	if (list->data != NULL) \
-		free(list->data); \
+		EZFREE(list->data); \
 	list->data = NULL; \
 	list->size = 0; \
 	list->maxsize = 0; \
@@ -101,7 +102,7 @@ void ARRLIST_##name##_clear(ARRLIST_##name* list);
 #define IMPL_ARRLIST_NAMED(name, T) \
 void ARRLIST_##name##_add(ARRLIST_##name* list, T element) { \
 	if (list->maxsize == 0) { \
-		list->data = (T*)calloc(1, sizeof(T)); \
+		list->data = (T*)EZALLOC(1, sizeof(T)); \
 		list->size = 1; \
 		list->maxsize = 1; \
 		memcpy(list->data, &element, sizeof(T)); \
@@ -110,9 +111,9 @@ void ARRLIST_##name##_add(ARRLIST_##name* list, T element) { \
 		list->size++; \
 	} else { \
 		list->maxsize *= 2; \
-		T* newdata = (T*)calloc(list->maxsize, sizeof(T)); \
+		T* newdata = (T*)EZALLOC(list->maxsize, sizeof(T)); \
 		memcpy(newdata, list->data, sizeof(T)*list->size); \
-		free(list->data); \
+		EZFREE(list->data); \
 		list->data = newdata; \
 		memcpy(&(list->data[list->size]), &element, sizeof(T)); \
 		list->size++; \
@@ -145,7 +146,7 @@ T ARRLIST_##name##_get(ARRLIST_##name* list, size_t index) { \
 \
 void ARRLIST_##name##_clear(ARRLIST_##name* list) { \
 	if (list->data != NULL) \
-		free(list->data); \
+		EZFREE(list->data); \
 	list->data = NULL; \
 	list->size = 0; \
 	list->maxsize = 0; \
