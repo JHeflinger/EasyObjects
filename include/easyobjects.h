@@ -3,7 +3,6 @@
 
 #include "ezologger.h"
 #include "easymemory.h"
-#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 
