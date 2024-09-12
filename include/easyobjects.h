@@ -6,10 +6,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#ifndef BOOL
-#define BOOL int 
-#endif
-
 #ifndef TRUE
 #define TRUE 1
 #endif 
