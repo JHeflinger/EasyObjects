@@ -15,6 +15,11 @@
 #endif
 
 // dynamic structs
+#define DECLARE_PAIR(T) \
+typedef struct { \
+	T value[2]; \
+} PAIR_##T;
+
 #define DECLARE_ARRLIST(T) \
 typedef struct { \
 	size_t size; \
