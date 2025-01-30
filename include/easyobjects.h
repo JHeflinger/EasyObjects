@@ -25,6 +25,11 @@ typedef struct { \
 	T value[3]; \
 } TRIPLET_##T;
 
+#define DECLARE_QUAD(T) \
+typedef struct { \
+	T value[4]; \
+} QUAD_##T;
+
 #define DECLARE_ARRLIST(T) \
 typedef struct { \
 	size_t size; \
